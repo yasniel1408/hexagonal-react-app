@@ -1,21 +1,18 @@
-import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
-import {RootState} from "../../store/redux.ts";
 import {useCallback, useEffect, useState} from "react";
-import {addUsers} from "../infrastructure/adapters/secondary/redux/usersSlice.ts";
 import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 import {UserAggregate} from "../domain/UserAggregate.ts";
 import {AxiosService} from "../infrastructure/adapters/secondary/http/axios-service.ts";
 import {LocalStorageService} from "../infrastructure/adapters/secondary/storage/localstorage-service.ts";
+import UserReduxService from "../infrastructure/adapters/secondary/redux/user-redux-service.ts";
+import {useDispatch} from "react-redux";
 
 export const useListUsers = () => {
+    const dispatch = useDispatch();
     const [loading, setLoading ] = useState(true);
-    const { users } = useAppSelector((state: RootState) => state.user);
-
-    const dispatch = useAppDispatch();
 
     const getUsers = useCallback(async() => {
         // llamada http request para traer los datos de los usuarios
-        const request = new AxiosService<UserDto, any>();
+        const request = new AxiosService();
         const usersRequest = await request.get("https://jsonplaceholder.typicode.com/users");
 
         // pasar al dominio los datos para que los valide
@@ -26,7 +23,7 @@ export const useListUsers = () => {
         new LocalStorageService<UserDto>().set("users", usersData);
 
         // meter en el store de store
-        dispatch(addUsers(usersData))
+        dispatch(UserReduxService.addUsers(usersData))
     },[])
 
     const loadDataFromStorageCache = useCallback(async () => {
@@ -35,7 +32,7 @@ export const useListUsers = () => {
         if(data) {
             const userAggregate = new UserAggregate<UserDto>();
             const usersData = userAggregate.listUsers(data);
-            dispatch(addUsers(usersData))
+            dispatch(UserReduxService.addUsers(usersData))
         }
     },[])
 
@@ -48,5 +45,5 @@ export const useListUsers = () => {
         })
     }, [getUsers, loadDataFromStorageCache]);
 
-    return { getUsers, users, loading };
+    return { getUsers, users: UserReduxService.getState(), loading };
 }

@@ -1,20 +1,20 @@
 import {useState} from "react";
 import {UserAggregate} from "../domain/UserAggregate.ts";
-import {useAppDispatch} from "../../store/hooks.ts";
-import {addUser} from "../infrastructure/adapters/secondary/redux/usersSlice.ts";
 import {useNavigate} from "react-router-dom";
 import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 import {AxiosService} from "../infrastructure/adapters/secondary/http/axios-service.ts";
 import {LocalStorageService} from "../infrastructure/adapters/secondary/storage/localstorage-service.ts";
+import UserReduxService from "../infrastructure/adapters/secondary/redux/user-redux-service.ts";
+import {useDispatch} from "react-redux";
 
 export const useCreateUser = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [error   , setError   ] = useState("");
     const [loading, setLoading ] = useState(false);
     const [name    , setName    ] = useState("");
     const [email    , setEmail    ] = useState("");
 
-    const dispatch = useAppDispatch();
 
     const createUser = async () => {
         setLoading(true)
@@ -23,17 +23,17 @@ export const useCreateUser = () => {
             const user = userAggregate.createUser( 0, name, email);
 
             // llamada http request para guardar el nuevo usuario
-            const request = new AxiosService<Partial<UserDto>, any>();
+            const request = new AxiosService();
             const userRequest = await request.post("https://jsonplaceholder.typicode.com/users", {
                 name: user.name,
                 email: user.email
             });
 
             // guardar en localstorage
-            new LocalStorageService<UserDto>().add("users", userRequest)
+            new LocalStorageService<UserDto>().add("users", userRequest.data)
 
-            // meter en el store de store
-            dispatch(addUser(user))
+            // meter en el store de redux
+            dispatch(UserReduxService.addUser(user))
         }catch (e: any) {
             setError(e?.message)
             setTimeout(() => {

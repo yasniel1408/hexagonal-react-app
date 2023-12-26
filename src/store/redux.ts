@@ -5,13 +5,13 @@ import {
     ThunkAction,
     PreloadedStateShapeFromReducersMapObject
 } from '@reduxjs/toolkit'
+import UserReduxService from "../users/infrastructure/adapters/secondary/redux/user-redux-service.ts";
 
 // import logger from 'store-logger'
 
-import usersSlice from "../users/infrastructure/adapters/secondary/redux/usersSlice.ts";
 
 const rootReducer = combineSlices( {
-    user: usersSlice,
+    user: UserReduxService.usersSlice.reducer,
 })
 
 export function setupStore(preloadedState?: PreloadedStateShapeFromReducersMapObject<RootState>) {
