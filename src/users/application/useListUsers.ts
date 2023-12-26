@@ -1,8 +1,8 @@
-import {useAppDispatch, useAppSelector} from "../infrastructure/adapters/secondary/redux/hooks.ts";
-import {RootState} from "../infrastructure/adapters/secondary/redux/redux.ts";
+import {useAppDispatch, useAppSelector} from "../../store/hooks.ts";
+import {RootState} from "../../store/redux.ts";
 import {useCallback, useEffect, useState} from "react";
-import {addUsers} from "../infrastructure/adapters/secondary/redux/users/usersSlice.ts";
-import {UserDto} from "../infrastructure/adapters/secondary/redux/users/user.dto.ts";
+import {addUsers} from "../infrastructure/adapters/secondary/redux/usersSlice.ts";
+import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 import {UserAggregate} from "../domain/UserAggregate.ts";
 import {AxiosService} from "../infrastructure/adapters/secondary/http/axios-service.ts";
 import {LocalStorageService} from "../infrastructure/adapters/secondary/storage/localstorage-service.ts";
@@ -25,7 +25,7 @@ export const useListUsers = () => {
         // guardar en el localstorage
         new LocalStorageService<UserDto>().set("users", usersData);
 
-        // meter en el store de redux
+        // meter en el store de store
         dispatch(addUsers(usersData))
     },[])
 

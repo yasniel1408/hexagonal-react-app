@@ -1,5 +1,5 @@
 import {useListUsers} from "../../../../../application/useListUsers.ts";
-import {UserDto} from "../../../secondary/redux/users/user.dto.ts";
+import {UserDto} from "../../../secondary/user.dto.ts";
 
 export const ListUserPage = () => {
 

@@ -6,9 +6,9 @@ import {
     PreloadedStateShapeFromReducersMapObject
 } from '@reduxjs/toolkit'
 
-// import logger from 'redux-logger'
+// import logger from 'store-logger'
 
-import usersSlice from "./users/usersSlice.ts";
+import usersSlice from "../users/infrastructure/adapters/secondary/redux/usersSlice.ts";
 
 const rootReducer = combineSlices( {
     user: usersSlice,

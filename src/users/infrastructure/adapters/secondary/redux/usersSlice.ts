@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import {UserDto} from "./user.dto.ts";
+import {UserDto} from "../user.dto.ts";
 
 interface UsersState {
     users: UserDto[]

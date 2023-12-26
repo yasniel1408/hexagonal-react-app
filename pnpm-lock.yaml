@@ -3,7 +3,7 @@ lockfileVersion: '6.0'
 dependencies:
   '@reduxjs/toolkit':
     specifier: ^2.0.1
-    version: 2.0.1(react-redux@9.0.4)(react@18.2.0)
+    version: 2.0.1(react-store@9.0.4)(react@18.2.0)
   axios:
     specifier: ^1.6.2
     version: 1.6.2
@@ -15,7 +15,7 @@ dependencies:
     version: 18.2.0(react@18.2.0)
   react-redux:
     specifier: ^9.0.4
-    version: 9.0.4(@types/react@18.2.43)(react@18.2.0)(redux@5.0.1)
+    version: 9.0.4(@types/react@18.2.43)(react@18.2.0)(store@5.0.1)
   react-router-dom:
     specifier: ^6.21.1
     version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
@@ -614,9 +614,9 @@ packages:
     dependencies:
       immer: 10.0.3
       react: 18.2.0
-      react-redux: 9.0.4(@types/react@18.2.43)(react@18.2.0)(redux@5.0.1)
+      react-redux: 9.0.4(@types/react@18.2.43)(react@18.2.0)(store@5.0.1)
       redux: 5.0.1
-      redux-thunk: 3.1.0(redux@5.0.1)
+      redux-thunk: 3.1.0(store@5.0.1)
       reselect: 5.0.1
     dev: false
 

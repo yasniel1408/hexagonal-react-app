@@ -1,5 +1,5 @@
 import {UserFactory} from "./UserFactory.ts";
-import {UserDto} from "../infrastructure/adapters/secondary/redux/users/user.dto.ts";
+import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 
 export class UserAggregate<U> {
     createUser(id: number, name: string, email: string): U {

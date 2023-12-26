@@ -1,6 +1,6 @@
 import {UserEntity} from "./models/UserEntity.ts";
 import {EmailObjectValue} from "./objects-values/EmailObjectValue.ts";
-import {UserDto} from "../infrastructure/adapters/secondary/redux/users/user.dto.ts";
+import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 
 export class UserFactory {
     create(id:number, name: string, email: string) {

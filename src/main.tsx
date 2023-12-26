@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './infrastructure/adapters/primary/ui/App.tsx'
+import App from './users/infrastructure/adapters/primary/ui/App.tsx'
 import './index.css'
 import {Provider} from "react-redux";
-import {setupStore} from "./infrastructure/adapters/secondary/redux/redux.ts";
+import {setupStore} from "./store/redux.ts";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

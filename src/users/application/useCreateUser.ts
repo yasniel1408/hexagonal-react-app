@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {UserAggregate} from "../domain/UserAggregate.ts";
-import {useAppDispatch} from "../infrastructure/adapters/secondary/redux/hooks.ts";
-import {addUser} from "../infrastructure/adapters/secondary/redux/users/usersSlice.ts";
+import {useAppDispatch} from "../../store/hooks.ts";
+import {addUser} from "../infrastructure/adapters/secondary/redux/usersSlice.ts";
 import {useNavigate} from "react-router-dom";
-import {UserDto} from "../infrastructure/adapters/secondary/redux/users/user.dto.ts";
+import {UserDto} from "../infrastructure/adapters/secondary/user.dto.ts";
 import {AxiosService} from "../infrastructure/adapters/secondary/http/axios-service.ts";
 import {LocalStorageService} from "../infrastructure/adapters/secondary/storage/localstorage-service.ts";
 
@@ -32,7 +32,7 @@ export const useCreateUser = () => {
             // guardar en localstorage
             new LocalStorageService<UserDto>().add("users", userRequest)
 
-            // meter en el store de redux
+            // meter en el store de store
             dispatch(addUser(user))
         }catch (e: any) {
             setError(e?.message)
